@@ -17,8 +17,27 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
-    # DELETE 'PASS' AND WRITE THIS CODE
-    pass
+    # try:
+    #     isValid(a, b, c)
+    # except TriangleError as ex:
+    #     return ex.args[0]
+
+    ### This works because they want the raised excpetion to not be caught
+    isValid(a,b,c)
+
+    if(a == b == c):
+        return 'equilateral'
+    elif(a == b or a == c or b == c):            
+        return 'isosceles'
+    else:
+        return 'scalene'
+
+def isValid(a, b, c):
+    if(a | b | c <= 0):
+        raise TriangleError("All sides must be greater than 0")
+
+    if(((a+b) < c) or ((a+c) < b) or ((c+b) < a)):
+        raise TriangleError("Two sides should be greater than third")
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError(Exception):
