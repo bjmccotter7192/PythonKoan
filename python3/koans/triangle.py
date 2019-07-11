@@ -20,7 +20,8 @@ def triangle(a, b, c):
     # try:
     #     isValid(a, b, c)
     # except TriangleError as ex:
-    #     return ex.args[0]
+    #     raise ex
+        ## LOG THIS AND TELL ME
 
     ### This works because they want the raised excpetion to not be caught
     isValid(a,b,c)
