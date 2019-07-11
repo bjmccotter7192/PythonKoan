@@ -32,18 +32,47 @@ from runner.koan import *
 #
 # Your goal is to write the score method.
 
+def getTripValue(num, dice):
+    if dice.count(num) >= 3:
+        if num == 1:
+            return num * 1000
+        else:
+            return num * 100
+
+    return 0
+
 def score(dice):
     score = 0
+    checked = False
+    foundNum = []
+    trimmedDice = dice
 
+    ### EMPTY CHECK FOR LISTS WITH NO ELEMENTS
     if len(dice) < 1:
-        return score
+        return score  
 
+    ### FIND SETS AND FILL DIFFERENT SCORES IF FOUND
     for di in dice:
+        result = getTripValue(di, dice)
+        if result > 0:
+            checked = True
+            foundNum.append(di)
+            score += result
+            break
+
+    ### TRIM ORIGINAL LIST IF SET WAS FOUND
+    if checked:
+        for i in range(3):
+            trimmedDice.remove(foundNum[0])        
+
+    ### ADD VALUES AFTER SET IS FOUND OR IF NO SET AT ALL 
+    for di in trimmedDice:
         if di == 1:
             score += 100
         elif di == 5:
             score += 50
 
+    ### RETURN SCORE
     return score
 
 class AboutScoringProject(Koan):
